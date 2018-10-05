@@ -14,10 +14,10 @@ Ejercitar la escritura de código en ambientes colaborativos utilizando una meto
 
 Nro | Nombre | Legajo | Mail
 ----|--------|--------|------
-1   |        |        |
-2   |        |        |
-3   |        |        |
-4   |        |        |
+1   | Gonzalez Rodrigo| 24470        |roariel06@gmail.com
+2   | Di Costanzo Juan Marcelo       |11111        |jmdicostanzo11@gmail.com
+3   | Perez Cesar       | 24563       | perez.cesaar@gmail.com
+
     
 ### Entrega
 
