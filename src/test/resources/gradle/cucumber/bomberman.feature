@@ -8,4 +8,4 @@ Feature: Crear Boomberman
   Scenario: Creo un boomberman
     Given Crear Boomberman
     When Seteo una posicion inicial 1 2
-    Then La celda es:
+    Then La celda es :

@@ -11,9 +11,10 @@ public class Celda {
 
     @Override
     public boolean equals(Object another) {
-        if ( !this.getClass().equals(another.getClass())) {
+        if (!this.getClass().equals(another.getClass())) {
             return false;
         }
+        
         Celda c = (Celda) another;
         return this.x.equals(c.x) && this.y.equals(c.y);
     }

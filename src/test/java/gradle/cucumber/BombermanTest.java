@@ -30,11 +30,13 @@ public class BombermanTest {
         bomberman.setPosicionInicial(0,0);
     }
 
-    @Then("^La celda es:")
+    @Then("^La celda es :")
     public void getCelda() throws Throwable {
         Celda celda = bomberman.getPosicionInicial();
         Celda expected = new Celda(0,0);
+        Celda other = new Celda(1,1);
 
         assertThat(celda).isEqualTo(expected);
+        assertThat(celda).isNotEqualTo(other);
     }
 }

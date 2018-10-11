@@ -22,4 +22,5 @@ public class Bomberman {
     public Celda getPosicionInicial() {
         return posicionInicial;
     }
+
 }
