@@ -3,40 +3,58 @@ package gradle.cucumber;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BombermanTest {
     private Bomberman bomberman;
 
-    @Given("^Crear Boomberman")
+    @Given("^Un Bomberman")
     public void crearBoomberman() throws Throwable {
         bomberman = new Bomberman();
+        Mapa mapa = new Mapa();
+        mapa.addParedes(new Celda(1,0));
+        mapa.addEnemigo(new Celda(-1,0));
+        bomberman.setMapa(mapa);
     }
 
-    @When("^Seteo \"([^\"]*)\" de vida")
-    public void setVida(Integer vida) throws Throwable {
-        bomberman.setVida(100);
+    @When("^Quiere mover a la celda \"([^\"]*)\" y la celda es vacia$")
+    public void quiereMoverALaCeldaYLaCeldaEsVacia(String direccion) throws Throwable {
+        bomberman.moverA(direccion);
     }
 
-    @Then("^La vida de Boomberman es:")
-    public void getVida() throws Throwable {
-        Integer actual = bomberman.getVida();
-
-        assertThat(actual).isEqualTo(100);
-    }
-
-    @When("^Seteo una posicion inicial (\\d+) (\\d+)$")
-    public void seteoUnaPosicionInicial(Integer x, Integer y) throws Throwable {
-        bomberman.setPosicionInicial(0,0);
-    }
-
-    @Then("^La celda es:")
-    public void getCelda() throws Throwable {
-        Celda celda = bomberman.getPosicionInicial();
-        Celda expected = new Celda(0,0);
+    @Then("^El Bomberman se mueve a la celda \"([^\"]*)\"$")
+    public void elBombermanSeMueveALaCelda(String direccion) throws Throwable {
+        Celda celda = new Celda(0,1);
         Celda other = new Celda(1,1);
 
-        assertThat(celda).isEqualTo(expected);
+        assertThat(this.bomberman.getPosicionActual()).isEqualTo(celda);
+
         assertThat(celda).isNotEqualTo(other);
+        assertThat(celda).isNotEqualTo(bomberman);
+    }
+
+
+    @When("^Quiere mover a la celda \"([^\"]*)\" y esta tiene una pared$")
+    public void quiereMoverALaCeldaYEstaTieneUnaPared(String direccion) throws Throwable {
+        bomberman.moverA(direccion);
+    }
+
+    @Then("^El Bomberman no se mueve$")
+    public void elBombermanNoSeMueve() throws Throwable {
+        Celda celda = new Celda(0,0);
+
+        assertThat(this.bomberman.getPosicionActual()).isEqualTo(celda);
+    }
+
+
+    @When("^Quiere mover a la celda \"([^\"]*)\" y esta tiene un enemigo$")
+    public void quiereMoverALaCeldaYEstaTieneUnEnemigo(String direccion) throws Throwable {
+        bomberman.moverA(direccion);
+    }
+
+    @Then("^El Bomberman se muere$")
+    public void elBombermanSeMuere() throws Throwable {
+        assertThat(this.bomberman.getVida()).isEqualTo(0);
     }
 }
