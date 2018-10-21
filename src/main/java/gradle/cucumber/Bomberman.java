@@ -15,10 +15,6 @@ public class Bomberman {
         return celdaInicial;
     }
 
-    public void setVida(Integer vida) {
-        this.vida = vida;
-    }
-
     public Integer getVida() {
         return vida;
     }
@@ -49,7 +45,6 @@ public class Bomberman {
     }
 
     private Celda calcularNuevaPosicionMoviendoseEn(String direccion) {
-
         return this.calculador.calcularposicionDeCelda(direccion,this.getPosicionActual());
     }
 
@@ -63,5 +58,14 @@ public class Bomberman {
 
     public void setMapa(Mapa mapa) {
         this.mapa = mapa;
+    }
+
+    public void ponerBomba(Integer ticks) {
+        Bomba bomba = new Bomba (this.posicionActual, ticks);
+        this.mapa.explotarBomba(bomba);
+    }
+
+    public Mapa getMapa() {
+        return this.mapa;
     }
 }

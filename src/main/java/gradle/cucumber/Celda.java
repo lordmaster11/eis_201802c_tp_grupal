@@ -4,9 +4,7 @@ public class Celda {
     private Integer x;
     private Integer y;
 
-    public Celda() {
-
-    }
+    public Celda() { }
 
     public Celda(Integer x, Integer y) {
         this.x = x;
