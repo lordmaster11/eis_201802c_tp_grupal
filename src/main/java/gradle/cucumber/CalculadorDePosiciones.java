@@ -7,6 +7,7 @@ public class CalculadorDePosiciones {
         this.calcularDireccion(direccion);
 
         Celda posicionFinal = new Celda();
+        //Tener en cuenta esquina de mapa
         posicionFinal.setY(posicionActual.getY() + direccionAMoverse.getYCoord());
         posicionFinal.setX(posicionActual.getX() + direccionAMoverse.getXCoord());
 
@@ -28,7 +29,7 @@ public class CalculadorDePosiciones {
                 direccionAMoverse = Direccion.OESTE;
                 break;
 
-        //Exception
+            //Exception
         }
     }
 }
