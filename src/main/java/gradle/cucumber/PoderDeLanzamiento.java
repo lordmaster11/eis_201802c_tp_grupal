@@ -1,8 +1,6 @@
 package gradle.cucumber;
 
 public class PoderDeLanzamiento {
-
-
     private Integer ticks;
     private Integer distancia;
 
@@ -21,7 +19,6 @@ public class PoderDeLanzamiento {
     }
 
     public Bomba calcularPosicion(Celda posicionActual) {
-
         Celda posicionATirar = new Celda(posicionActual.getX()+distancia,posicionActual.getY());
 
         return  new Bomba(posicionATirar,ticks);

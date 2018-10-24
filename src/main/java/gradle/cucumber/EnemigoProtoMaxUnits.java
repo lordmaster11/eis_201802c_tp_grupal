@@ -16,6 +16,4 @@ public class EnemigoProtoMaxUnits extends Enemigo {
         bomberman.ganarPoderLanzaBombas(this.aDistancia, this.conTicks);
         this.morir();
     }
-
-
 }

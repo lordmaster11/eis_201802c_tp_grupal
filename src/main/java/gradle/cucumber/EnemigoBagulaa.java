@@ -14,5 +14,4 @@ public class EnemigoBagulaa extends Enemigo {
         bomberman.ganarPoderLanzaBombas(aDistancia,conTicks);
         this.morir();
     }
-
 }
