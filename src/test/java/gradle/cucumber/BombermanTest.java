@@ -117,6 +117,7 @@ public class BombermanTest {
 
     //////////////// Punto 3-4-5  ////////////////
 
+
     @And("^Un enemigo \"([^\"]*)\"$")
     public void unEnemigo(String unEnemigo) throws Throwable {
         Enemigo bagulaa = new EnemigoBagulaa(4, 1);
@@ -129,6 +130,7 @@ public class BombermanTest {
 
 
     //////////////// Punto 3 ////////////////
+
 
     @When("^Pone una bomba y mata a Bagulaa$")
     public void poneUnaBombaYMataABagulaa() throws Throwable {
@@ -150,6 +152,7 @@ public class BombermanTest {
 
     //////////////// Punto 4 ////////////////
 
+
     @When("^Pone una bomba y mata a Proto Max Jr$")
     public void poneUnaBombaYMataAProtoMaxJr() throws Throwable {
         bomberman.moverA("Este"); bomberman.moverA("Este");
@@ -164,16 +167,24 @@ public class BombermanTest {
     @Then("^Bomberman gana poder de saltar todo tipo de paredes$")
     public void bombermanGanaPoderDeSaltarTodoTipoDeParedes() throws Throwable {
         Celda celdaProtoMaxJr = new Celda(5,4);
+        Pared acero = new ParedAcero(3,5);
+        mapa.addParedes(acero);
+        bomberman.moverA("Este");
+        bomberman.moverA("Sur");
+        bomberman.moverA("Sur");
+        Celda celda = new Celda(5,2);
 
         assert(!mapa.hayEnemigoEn(celdaProtoMaxJr));
         assert(bomberman.tienePoderDeSaltar());
+        assert(mapa.hayPared(new Celda (3,5)));
+        assert(bomberman.getPosicionActual().equals(celda));
     }
 
     //////////////// Punto 5 ////////////////
 
+
     @When("^Pone una bomba y mata a Proto-Max Units$")
     public void poneUnaBombaYMataAProtoMaxUnits() throws Throwable {
-
         bomberman.moverA("Este"); bomberman.moverA("Este");
         bomberman.moverA("Norte"); bomberman.moverA("Norte");
         bomberman.moverA("Norte"); bomberman.moverA("Norte");
@@ -191,6 +202,5 @@ public class BombermanTest {
         assert(bomberman.tienePoderDeSaltar());
         assert(bomberman.tienePoderDeLanzarBombas());
     }
-
 }
 

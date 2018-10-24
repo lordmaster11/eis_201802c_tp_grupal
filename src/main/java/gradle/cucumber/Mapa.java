@@ -48,7 +48,6 @@ public class Mapa {
     }
 
     private void boom(String direccion, Bomba bomba) {
-
         CalculadorDePosiciones calculadora = new CalculadorDePosiciones();
 
         Celda posicionActual=bomba.getPosicion();
@@ -61,18 +60,14 @@ public class Mapa {
     }
 
     private void matarEnemigos(Celda posicion) {
-
         this.enemigos
                 .stream()
                 .filter(i -> i.getPosicion().equals(posicion))
                 .findFirst().
                 ifPresent(i -> {this.enemigos.remove(i); this.otorgarPoderesDe(i);});
-
-
     }
 
     private void otorgarPoderesDe(Enemigo unEnemigo) {
-
         unEnemigo.otorgarPoderesABomberman(this.bomberman);
 
     }

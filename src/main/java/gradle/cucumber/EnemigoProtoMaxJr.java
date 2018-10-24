@@ -6,11 +6,9 @@ public class EnemigoProtoMaxJr extends Enemigo {
         super(x,y);
     }
 
-
     @Override
     public void otorgarPoderesABomberman(Bomberman bomberman) {
         bomberman.ganarPoderSaltoDePared();
         this.morir();
     }
-
 }

@@ -1,7 +1,5 @@
 package gradle.cucumber;
 
-import jdk.nashorn.internal.ir.UnaryNode;
-
 public abstract class Enemigo {
     private Celda posicion = new Celda();
     private boolean estaVivo = true;
