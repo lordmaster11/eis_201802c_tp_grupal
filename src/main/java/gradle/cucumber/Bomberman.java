@@ -37,7 +37,7 @@ public class Bomberman {
 
         if(puedeMover(celdaAMoverse)) {
             this.setPosicionActual(celdaAMoverse);
-        }else if(this.poderSaltar && !mapa.finalDeTablero()){
+        }else if(this.poderSaltar & !mapa.finalDeTablero()){
             this.setPosicionActual(calculador.calcularposicionDeCelda(direccion, celdaAMoverse));
          }
 

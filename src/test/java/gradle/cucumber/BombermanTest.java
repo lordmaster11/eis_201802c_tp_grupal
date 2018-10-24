@@ -49,7 +49,7 @@ public class BombermanTest {
     public void elBombermanNoSeMueve() throws Throwable {
         Celda celda = new Celda(0,0);
 
-        assertThat(this.bomberman.getPosicionActual()).isEqualTo(celda);
+        assertThat((this.bomberman.getPosicionActual()).isEqualTo(celda));
     }
 
 
