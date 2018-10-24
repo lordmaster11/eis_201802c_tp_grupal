@@ -1,7 +1,10 @@
 package gradle.cucumber;
 
-public class Enemigo {
-    private Celda posicion = new Celda();;
+import jdk.nashorn.internal.ir.UnaryNode;
+
+public abstract class Enemigo {
+    private Celda posicion = new Celda();
+    private boolean estaVivo = true;
 
     public Enemigo(Integer x, Integer y) {
         posicion.setX(x);
@@ -10,5 +13,11 @@ public class Enemigo {
 
     public Celda getPosicion() {
         return this.posicion;
+    }
+
+    public abstract void otorgarPoderesABomberman(Bomberman bomberman);
+
+    protected void morir(){
+     this.estaVivo = false;
     }
 }

@@ -2,11 +2,18 @@ package gradle.cucumber;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Mapa {
+    Bomberman bomberman;
     List<Pared> paredes = new ArrayList<>();
     List<Enemigo> enemigos = new ArrayList<>();
+
+    public Mapa(Bomberman bomberman) {
+       this.bomberman = bomberman;
+    }
 
     public boolean hayPared(Celda celda) {
         return this.paredes.stream().anyMatch(i-> i.getPosicion().equals(celda));
@@ -54,10 +61,27 @@ public class Mapa {
     }
 
     private void matarEnemigos(Celda posicion) {
-        this.enemigos = this.enemigos.stream().filter(i-> !i.getPosicion().equals(posicion)).collect(Collectors.toList());
+
+        this.enemigos
+                .stream()
+                .filter(i -> i.getPosicion().equals(posicion))
+                .findFirst().
+                ifPresent(i -> {this.enemigos.remove(i); this.otorgarPoderesDe(i);});
+
+
+    }
+
+    private void otorgarPoderesDe(Enemigo unEnemigo) {
+
+        unEnemigo.otorgarPoderesABomberman(this.bomberman);
+
     }
 
     private void explotarParedesUbicadasEn(Celda posicion) {
         this.paredes = this.paredes.stream().filter(i-> !(i.getPosicion().equals(posicion)&& i.esDeMelanina())).collect(Collectors.toList());
+    }
+
+    public boolean finalDeTablero() {
+        return false;
     }
 }

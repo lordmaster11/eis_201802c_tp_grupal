@@ -6,10 +6,16 @@ public class CalculadorDePosiciones {
     public Celda calcularposicionDeCelda(String direccion, Celda posicionActual) {
         this.calcularDireccion(direccion);
 
-        Celda posicionFinal = new Celda();
+        Celda posicionFinal = posicionActual;
         //Tener en cuenta esquina de mapa
-        posicionFinal.setY(posicionActual.getY() + direccionAMoverse.getYCoord());
-        posicionFinal.setX(posicionActual.getX() + direccionAMoverse.getXCoord());
+        Integer posX = posicionActual.getX() + direccionAMoverse.getXCoord();
+        Integer posY = posicionActual.getY() + direccionAMoverse.getYCoord();
+        if(posX >= 0){
+            posicionFinal.setX(posX);
+        }
+        if(posY >= 0){
+            posicionFinal.setY(posY);
+        }
 
         return posicionFinal;
     }
