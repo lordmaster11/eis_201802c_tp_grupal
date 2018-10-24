@@ -36,4 +36,9 @@ public class Celda {
         Celda c = (Celda) another;
         return this.x.equals(c.x) && this.y.equals(c.y);
     }
+
+    public boolean isEqualTo(Celda celda) {
+
+    return  this.getX() == celda.getX() && this.getY() == celda.getY();
+    }
 }

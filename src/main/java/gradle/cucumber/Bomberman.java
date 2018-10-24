@@ -3,8 +3,11 @@ package gradle.cucumber;
 public class Bomberman {
     private Integer vida;
     private Celda posicionActual = this.posicionInicial();
-    private Mapa mapa = new Mapa();
+    private Mapa mapa = new Mapa(this);
     private CalculadorDePosiciones calculador = new CalculadorDePosiciones();
+    private PoderDeLanzamiento poderLanzar = new PoderDeLanzamiento(0,1);
+    private boolean poderSaltar = false;
+
 
     public Bomberman() {
     }
@@ -34,7 +37,10 @@ public class Bomberman {
 
         if(puedeMover(celdaAMoverse)) {
             this.setPosicionActual(celdaAMoverse);
-        }
+        }else if(this.poderSaltar & !mapa.finalDeTablero()){
+            this.setPosicionActual(calculador.calcularposicionDeCelda(direccion, celdaAMoverse));
+         }
+
         if(hayEnemigo(celdaAMoverse)){
             this.muere();
         }
@@ -62,10 +68,33 @@ public class Bomberman {
 
     public void ponerBomba(Integer ticks) {
         Bomba bomba = new Bomba (this.posicionActual, ticks);
+        if(tienePoderDeLanzarBombas()){
+          bomba = this.getpoderLanzar().calcularPosicion(this.posicionActual);
+        }
         this.mapa.explotarBomba(bomba);
+    }
+
+    private PoderDeLanzamiento getpoderLanzar() {
+        return this.poderLanzar;
     }
 
     public Mapa getMapa() {
         return this.mapa;
+    }
+
+    public boolean tienePoderDeLanzarBombas() {
+        return this.poderLanzar.puedeLanzarBombas();
+    }
+
+    public void ganarPoderLanzaBombas(Integer distancia, Integer ticks) {
+        this.poderLanzar.ganarPoder(distancia,ticks);
+    }
+
+    public void ganarPoderSaltoDePared() {
+        this.poderSaltar = true;
+    }
+
+    public boolean tienePoderDeSaltar() {
+        return poderSaltar;
     }
 }
