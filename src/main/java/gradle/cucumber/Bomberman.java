@@ -30,18 +30,19 @@ public class Bomberman {
         return this.posicionActual;
     }
 
-    public void moverA(String direccion){
+    public void moverA(String direccion) {
         Celda celdaAMoverse;
 
         celdaAMoverse = this.calcularNuevaPosicionMoviendoseEn(direccion);
 
-        if(puedeMover(celdaAMoverse)) {
+        if (puedeMover(celdaAMoverse)) {
             this.setPosicionActual(celdaAMoverse);
-        }else if(this.poderSaltar & !mapa.finalDeTablero()){
-            this.setPosicionActual(calculador.calcularposicionDeCelda(direccion, celdaAMoverse));
-         }
+        } else if (this.getpoderSaltar() & !mapa.finalDeTablero()){
 
-        if(hayEnemigo(celdaAMoverse)){
+            this.setPosicionActual(calculador.calcularposicionDeCelda(direccion, celdaAMoverse));
+        }
+
+        if (hayEnemigo(celdaAMoverse)) {
             this.muere();
         }
     }
@@ -68,7 +69,7 @@ public class Bomberman {
 
     public void ponerBomba(Integer ticks) {
         Bomba bomba = new Bomba (this.posicionActual, ticks);
-        if(tienePoderDeLanzarBombas()){
+        if(this.tienePoderDeLanzarBombas()){
           bomba = this.getpoderLanzar().calcularPosicion(this.posicionActual);
         }
         this.mapa.explotarBomba(bomba);
@@ -88,6 +89,7 @@ public class Bomberman {
 
     public void ganarPoderLanzaBombas(Integer distancia, Integer ticks) {
         this.poderLanzar.ganarPoder(distancia,ticks);
+        this.tienePoderDeLanzarBombas();
     }
 
     public void ganarPoderSaltoDePared() {
@@ -95,6 +97,10 @@ public class Bomberman {
     }
 
     public boolean tienePoderDeSaltar() {
+        return poderSaltar;
+    }
+
+    public boolean getpoderSaltar() {
         return poderSaltar;
     }
 }

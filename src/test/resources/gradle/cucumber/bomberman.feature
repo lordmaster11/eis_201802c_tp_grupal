@@ -56,3 +56,10 @@ Feature: Mover Bomberman
     And Un enemigo "Proto-Max Units"
     When Pone una bomba y mata a Proto-Max Units
     Then Bomberman gana poder de lanzar "2" bombas al mismo tiempo
+
+
+  Scenario: Bomberman suelta una bomba en el sitio donde se encuentra
+    Given Un Bomberman
+    And Otro enemigo "Proto-Max Units" y otro enemigo
+    When Pone una bomba y mata a Proto-Max Units y gana poder de lanzar bombas y saltar paredes y se mueve al "Norte"
+    Then Cuando hay una pared en la posicion "Este" bomberman la salta

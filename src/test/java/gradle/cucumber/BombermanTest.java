@@ -1,5 +1,6 @@
 package gradle.cucumber;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -167,17 +168,9 @@ public class BombermanTest {
     @Then("^Bomberman gana poder de saltar todo tipo de paredes$")
     public void bombermanGanaPoderDeSaltarTodoTipoDeParedes() throws Throwable {
         Celda celdaProtoMaxJr = new Celda(5,4);
-        Pared acero = new ParedAcero(3,5);
-        mapa.addParedes(acero);
-        bomberman.moverA("Este");
-        bomberman.moverA("Sur");
-        bomberman.moverA("Sur");
-        Celda celda = new Celda(5,2);
 
         assert(!mapa.hayEnemigoEn(celdaProtoMaxJr));
         assert(bomberman.tienePoderDeSaltar());
-        assert(mapa.hayPared(new Celda (3,5)));
-        assert(bomberman.getPosicionActual().equals(celda));
     }
 
     //////////////// Punto 5 ////////////////
@@ -202,5 +195,28 @@ public class BombermanTest {
         assert(bomberman.tienePoderDeSaltar());
         assert(bomberman.tienePoderDeLanzarBombas());
     }
+
+    @And("^Otro enemigo \"([^\"]*)\" y otro enemigo$")
+    public void otroEnemigoYOtroEnemigo(String arg0) throws Throwable {
+        Enemigo protoMaxUnit = new EnemigoProtoMaxUnits(0,1);
+        Pared pared = new ParedAcero(1,0);
+        mapa.addParedes(pared);
+        mapa.addEnemigo(protoMaxUnit);
+
+    }
+
+    @When("^Pone una bomba y mata a Proto-Max Units y gana poder de lanzar bombas y saltar paredes y se mueve al \"([^\"]*)\"$")
+    public void poneUnaBombaYMataAProtoMaxUnitsYGanaPoderDeLanzarBombasYSaltarParedesYSeMueveAl(String direccion) throws Throwable {
+        bomberman.ponerBomba(4);
+        bomberman.moverA("Este");
+    }
+
+    @Then("^Cuando hay una pared en la posicion \"([^\"]*)\" bomberman la salta$")
+    public void cuandoHayUnaParedEnLaPosicionBombermanLaSalta(String direccion) throws Throwable {
+        Celda celda = new Celda(2,0);
+        assert (bomberman.getPosicionActual().equals(celda));
+    }
+
+
 }
 
